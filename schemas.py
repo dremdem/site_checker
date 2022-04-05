@@ -71,23 +71,9 @@ class DBWebsite(CheckerBaseModel):
     regexp_pattern: Pattern
 
 
-class DBCheckResult(CheckerBaseModel):
+class DBCheckResult(CheckResult, CheckerBaseModel):
     """Schema for the DB check result"""
 
     __tablename__ = "checker.check_result"
 
     website_name: str
-    response_time: Annotated[
-        int,
-        pydantic.Field(description="The site response time in milliseconds")
-    ]
-    status_code: int
-    regex_ok: Annotated[
-        Optional[bool],
-        pydantic.Field(
-            description="Result of the regex pattern check if needed to."
-        )
-    ]
-
-
-
