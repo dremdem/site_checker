@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-postgresql = "*"
+psycopg = "*"
+responses = "*"
+
+[packages]
+psycopg2 = "*"
+pydantic = "*"
+requests = "*"
+
+[requires]
+python_version = "3.8"
