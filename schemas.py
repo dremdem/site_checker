@@ -67,8 +67,13 @@ class DBWebsite(CheckerBaseModel):
 
     name: str
     url: pydantic.AnyUrl
-    cron_period: str
-    regexp_pattern: Pattern
+    cron_period: Annotated[
+        str,
+        pydantic.Field(
+            description="String representing the cron-like schedule definition."
+        )
+    ]
+    regexp_pattern: Optional[Pattern]
 
 
 class DBCheckResult(CheckResult, CheckerBaseModel):
