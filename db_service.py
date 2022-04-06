@@ -16,8 +16,8 @@ def write_check_result(
     """
     Write check result to the DB.
 
-    :param connection: PostgreSQL connection.
     :param check_result: Schema model with the check result values.
+    :param connection: PostgreSQL connection.
     :return: Success result ot not.
     """
     if isinstance(check_result, dict):
@@ -30,7 +30,7 @@ def write_check_result(
     return True
 
 
-def read_websites(connection) -> List[schemas.DBWebsite]:
+def read_websites(connection=db.DBConn.get_conn()) -> List[schemas.DBWebsite]:
     """
     Read all websites from the DB
 

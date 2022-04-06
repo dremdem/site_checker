@@ -1,5 +1,5 @@
 """
-Store all configurations
+Store configurations
 
 Import as:
 import config

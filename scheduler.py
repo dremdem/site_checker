@@ -1,46 +1,33 @@
-"""Schedules all checker jobs"""
-import datetime
+"""
+Scheduler service
+
+Import as:
+import scheduler
+"""
 from typing import Callable
 
 import apscheduler.schedulers.background as back_scheduler
 import apscheduler.triggers.cron as triggers
 
-
-import db
-import db_service
-import url_checker
-
-# scheduler = back_scheduler.BlockingScheduler()
 scheduler = back_scheduler.BackgroundScheduler()
 
 
-def test_job(text):
-    print(f"{datetime.datetime.now()}: {text}")
+def add_job(job: Callable, kwargs: dict, cron: str) -> None:
+    """
+    Add a job to a scheduler.
 
-
-def add_job(job: Callable, kwargs: dict, cron: str):
+    :param job: Callable function to add
+    :param kwargs: Dict with parameters which passed to the job
+    :param cron: Cron string for scheduling period
+        Example: '*/2 * * * *' = one time in two minutes
+    :return:
+    """
     scheduler.add_job(
         job,
         triggers.CronTrigger.from_crontab(cron),
         kwargs=kwargs)
 
 
-def start():
+def start() -> None:
+    """Helper for starting the scheduler"""
     scheduler.start()
-
-
-def reschedule_all():
-    """Delete all jobs and add all it from the DB"""
-    conn = db.DBConn.get_conn()
-    wesites_list = db_service.read_websites(conn)
-    for website in wesites_list:
-        scheduler.add_job(test_job,
-                          triggers.CronTrigger.from_crontab("* * * * *"),
-                          kwargs={"text": "One minute!!!"})
-
-    scheduler.add_job(test_job, triggers.CronTrigger.from_crontab("* * * * *"), kwargs={"text": "One minute!!!"})
-    scheduler.add_job(test_job, triggers.CronTrigger.from_crontab("*/2 * * * *"), kwargs={"text": "Two minute!!!"})
-    scheduler.start()
-
-
-# reschedule_all()

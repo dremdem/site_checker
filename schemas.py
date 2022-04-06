@@ -1,7 +1,12 @@
-"""Schemas for the data models"""
+"""
+Schemas for the data models
+
+Import as:
+import schemas
+"""
 from abc import abstractmethod
 import http
-from typing import Optional, Pattern
+from typing import Optional, Pattern, List
 from typing_extensions import Annotated
 
 import pydantic
@@ -23,15 +28,15 @@ class CheckResult(pydantic.BaseModel):
     ]
 
     @pydantic.validator('status_code')
-    def http_valid_status_code(cls, v: int): # noqa
+    def http_valid_status_code(cls, value: int): # noqa
         """
         Simple status code validator.
 
         :param v: Status code to validate.
         :return:  Parsed value of the status code.
         """
-        v = http.HTTPStatus(v)
-        return v.value
+        value = http.HTTPStatus(v)
+        return value.value
 
 
 class CheckerBaseModel(pydantic.BaseModel):
@@ -46,17 +51,23 @@ class CheckerBaseModel(pydantic.BaseModel):
         """
         pass
 
-    def _get_insert_values(self):
+    def _get_string_values(self) -> List[str]:
+        """Return list string field values"""
         return [
             f"'{str(value)}'" if not isinstance(value, type(None)) else "null"
             for value in self.dict().values()
         ]
 
-    def get_insert_query(self):
+    def get_insert_query(self) -> str:
+        """
+        Builds the INSERT query based on the field values.
+
+        :return: String with the Insert query.
+        """
         return (
             f"INSERT INTO {self.__tablename__} "
             f"({', '.join(self.dict().keys())}) " 
-            f"VALUES ({', '.join(self._get_insert_values())})"
+            f"VALUES ({', '.join(self._get_string_values())})"
         )
 
 

@@ -1,15 +1,17 @@
 """The main site_checker module"""
-import db
 import db_service
 import kafka_service
 import scheduler
 import schemas
-
 import url_checker
 
 
 def process_website(db_website: schemas.DBWebsite):
-    """Check the site and send results to the Kafka"""
+    """
+    Check the site and send results to the Kafka
+
+    :param db_website: DBWebsite to process.
+    """
     check_result = url_checker.check_url(
         db_website.url,
         regexp_pattern=db_website.regexp_pattern)
@@ -21,7 +23,7 @@ def process_website(db_website: schemas.DBWebsite):
 
 def schedule_all_websites():
     """Schedule jobs to process all websites"""
-    for website in db_service.read_websites(db.DBConn.get_conn()):
+    for website in db_service.read_websites():
         scheduler.add_job(
             process_website,
             kwargs={"db_website": website},

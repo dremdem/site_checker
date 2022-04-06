@@ -11,6 +11,12 @@ class DBConn:
 
     @classmethod
     def get_conn(cls):
+        """
+        Class method for obtaining Postgres connection
+        from anywhere in the application.
+
+        :return: Postgres connection.
+        """
         if not cls.__conn__:
             try:
                 print('connecting to PostgreSQL database...')
