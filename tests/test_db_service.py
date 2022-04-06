@@ -4,7 +4,7 @@ import db_service
 
 
 def test_write_check_result(postgresql_my_with_schema, check_result1):
-    db_service.write_check_result(postgresql_my_with_schema, check_result1)
+    db_service.write_check_result(check_result1, postgresql_my_with_schema)
     cur = postgresql_my_with_schema.cursor()
     cur.execute("select count(*) from checker.check_result")
     result_count = cur.fetchone()[0]

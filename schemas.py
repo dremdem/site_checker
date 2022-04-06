@@ -35,8 +35,8 @@ class CheckResult(pydantic.BaseModel):
         :param v: Status code to validate.
         :return:  Parsed value of the status code.
         """
-        value = http.HTTPStatus(v)
-        return value.value
+        http_status = http.HTTPStatus(value)
+        return http_status.value
 
 
 class CheckerBaseModel(pydantic.BaseModel):
