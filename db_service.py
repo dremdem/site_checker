@@ -4,14 +4,15 @@ Services for DB operations.
 Import as:
 import db_service
 """
-from typing import List
+from typing import List, Union
 
+import db
 import schemas
 
 
 def write_check_result(
-        connection,
-        check_result: schemas.DBCheckResult) -> bool:
+        check_result: Union[schemas.DBCheckResult, dict],
+        connection=db.DBConn.get_conn()) -> bool:
     """
     Write check result to the DB.
 
@@ -19,8 +20,13 @@ def write_check_result(
     :param check_result: Schema model with the check result values.
     :return: Success result ot not.
     """
-    cur = connection.cursor()
-    cur.execute(check_result.get_insert_query())
+    if isinstance(check_result, dict):
+        check_result = schemas.DBCheckResult(**check_result)
+
+    with connection.cursor() as cur:
+        cur.execute(check_result.get_insert_query())
+    connection.commit()
+
     return True
 
 

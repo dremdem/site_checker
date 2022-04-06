@@ -1,4 +1,9 @@
-"""Services for check urls"""
+"""
+Services for check urls
+
+Import as:
+import url_checker
+"""
 
 from typing import Optional
 import re

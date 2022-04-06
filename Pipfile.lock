@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bae0166cb5cdca616d65a1a238e5985a56c6042d94bedd5389e66454d86d6bbb"
+            "sha256": "fbd54cb34594e2ef2929b71e9be762f1cc75d78ec95b7e398c9843314d24d0bc"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -69,6 +69,14 @@
             "markers": "python_version >= '3'",
             "version": "==3.3"
         },
+        "kafka-python": {
+            "hashes": [
+                "sha256:04dfe7fea2b63726cd6f3e79a2d86e709d608d74406638c5da33a01d45a9d7e3",
+                "sha256:2d92418c7cb1c298fa6c7f0fb3519b520d0d7526ac6cb7ae2a4fc65a51a94b6e"
+            ],
+            "index": "pypi",
+            "version": "==2.0.2"
+        },
         "psycopg2": {
             "hashes": [
                 "sha256:06f32425949bd5fe8f625c49f17ebb9784e1e4fe928b7cce72edc36fb68e4c0c",
@@ -126,6 +134,14 @@
             ],
             "index": "pypi",
             "version": "==1.9.0"
+        },
+        "python-dotenv": {
+            "hashes": [
+                "sha256:b7e3b04a59693c42c36f9ab1cc2acc46fa5df8c78e178fc33a8d4cd05c8d498f",
+                "sha256:d92a187be61fe482e4fd675b6d52200e7be63a12b724abbf931a40ce4fa92938"
+            ],
+            "index": "pypi",
+            "version": "==0.20.0"
         },
         "pytz": {
             "hashes": [
