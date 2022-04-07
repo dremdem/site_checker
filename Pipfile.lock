@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fbd54cb34594e2ef2929b71e9be762f1cc75d78ec95b7e398c9843314d24d0bc"
+            "sha256": "45c48130bfbbd03915bc997e4a7e86f88a61015ac22d0a17cfb6ed3fd607018d"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -369,6 +369,14 @@
             ],
             "index": "pypi",
             "version": "==7.1.1"
+        },
+        "pytest-mock": {
+            "hashes": [
+                "sha256:5112bd92cc9f186ee96e1a92efc84969ea494939c3aead39c50f421c4cc69534",
+                "sha256:6cff27cec936bf81dc5ee87f07132b807bcda51106b5ec4b90a04331cba76231"
+            ],
+            "index": "pypi",
+            "version": "==3.7.0"
         },
         "pytest-postgresql": {
             "hashes": [

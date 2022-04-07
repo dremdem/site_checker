@@ -1,5 +1,6 @@
 """Serving DB connection"""
 import psycopg2
+import psycopg2.extensions as psql_ext
 
 import config
 
@@ -10,7 +11,7 @@ class DBConn:
     __conn__ = None
 
     @classmethod
-    def get_conn(cls):
+    def get_conn(cls) -> psql_ext.connection:
         """
         Class method for obtaining Postgres connection
         from anywhere in the application.
@@ -22,6 +23,7 @@ class DBConn:
                 print('connecting to PostgreSQL database...')
                 conn = DBConn.__conn__ = psycopg2.connect(
                     host=config.POSTGRES_HOST,
+                    port=config.POSTGRES_PORT,
                     database=config.POSTGRES_DB,
                     user=config.POSTGRES_USER,
                     password=config.POSTGRES_PASSWORD
