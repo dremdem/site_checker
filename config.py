@@ -16,6 +16,8 @@ else:
     dotenv.load_dotenv()
 
 
+BASE_DIR = pathlib.Path(__file__).parent
+
 POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
 POSTGRES_USER = os.environ.get("POSTGRES_USER")
 POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")

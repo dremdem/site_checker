@@ -1,9 +1,12 @@
 """Fixtures for the tests"""
 
+import os
+
 import pytest
 from pytest_postgresql import factories
 import responses
 
+import config
 import schemas
 
 
@@ -25,7 +28,7 @@ CHECK_RESULT2 = {
 
 postgresql_my_with_schema = factories.postgresql(
     'postgresql_proc',
-    load=['../db/db_init.sql']
+    load=[os.path.join(config.BASE_DIR, 'db/db_init.sql')]
 )
 
 

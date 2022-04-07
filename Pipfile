@@ -9,6 +9,7 @@ pytest-postgresql = "*"
 psycopg = "*"
 responses = "*"
 pytest-mock = "*"
+coverage = "*"
 
 [packages]
 psycopg2 = "*"
