@@ -130,6 +130,12 @@ site_checker
 |   url_checker.py: Site checker itself
 ```
 
+## TBD (To be done)
+
+- DB Schema init by CLI
+- Custom env-file by CLI
+- Finalize the tests
+- Operating websites setup, CRUD operations by CLI
 
 ## Contributing 
 
