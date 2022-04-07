@@ -1,8 +1,12 @@
 """Serving DB connection"""
+import logging
+
 import psycopg2
 import psycopg2.extensions as psql_ext
 
 import config
+
+logger = logging.getLogger(__name__)
 
 
 class DBConn:
@@ -20,7 +24,7 @@ class DBConn:
         """
         if not cls.__conn__:
             try:
-                print('connecting to PostgreSQL database...')
+                logger.info('connecting to PostgreSQL database...')
                 conn = DBConn.__conn__ = psycopg2.connect(
                     host=config.POSTGRES_HOST,
                     port=config.POSTGRES_PORT,
@@ -32,8 +36,8 @@ class DBConn:
                 cursor.execute('SELECT VERSION()')
                 db_version = cursor.fetchone()
             except Exception as error:
-                print('Error: connection not established {}'.format(error))
+                logger.error('Error: connection not established {}'.format(error))
                 DBConn.__conn__ = None
             else:
-                print('connection established\n{}'.format(db_version[0]))
+                logger.info('connection established\n{}'.format(db_version[0]))
         return cls.__conn__

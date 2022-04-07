@@ -4,12 +4,17 @@ Services for the Kafka
 Import as:
 import kafka_service
 """
+import logging
+
 import json
 from typing import Callable
 
 import kafka # noqa
 
 import config
+
+logger = logging.getLogger(__name__)
+
 
 producer = kafka.KafkaProducer(
     bootstrap_servers=[f'{config.KAFKA_HOST}:{config.KAFKA_PORT}'],
@@ -39,6 +44,6 @@ def consume_messages(processor: Callable) -> None:
     """
     for message in consumer:
         processor(message.value)
-        print("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
-                                             message.offset, message.key,
-                                             message.value))
+        logger.info(
+            f"{message.topic}:{message.partition}:{message.offset}: "
+            f"key={message.key} value={message.value}")
