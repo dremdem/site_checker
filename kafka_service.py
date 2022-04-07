@@ -18,12 +18,15 @@ logger = logging.getLogger(__name__)
 
 producer = kafka.KafkaProducer(
     bootstrap_servers=[f'{config.KAFKA_HOST}:{config.KAFKA_PORT}'],
-    value_serializer=lambda m: json.dumps(m).encode('ascii'))
+    value_serializer=lambda m: json.dumps(m).encode('ascii'),
+    **config.KAFKA_CREDS
+)
 
 consumer = kafka.KafkaConsumer(
     config.KAFKA_CHECKER_TOPIC,
     bootstrap_servers=[f'{config.KAFKA_HOST}:{config.KAFKA_PORT}'],
-    value_deserializer=lambda m: json.loads(m.decode('ascii'))
+    value_deserializer=lambda m: json.loads(m.decode('ascii')),
+    **config.KAFKA_CREDS,
 )
 
 

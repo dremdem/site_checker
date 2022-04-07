@@ -73,6 +73,35 @@ KAFKA_CHECKER_TOPIC=webchecker
 
 ### Remote setup
 
+#### Setup remote Kafka and PostgreSQL services
+
+Take time and set up the kafka locally as in the following link:
+
+- Kafka: https://help.aiven.io/en/articles/5343895-python-examples-for-testing-aiven-for-apache-kafka
+  - Make Kafka topic
+  - Copy all credentials files to the project location
+  - Copy all connections parameters to the .env file (see below)
+- PostgreSQL: https://help.aiven.io/en/collections/341080-postgresql
+  - Copy all connections parameters to the .env file (see below)
+  
+#### Make .env file
+
+```text
+POSTGRES_HOST=<******.aivencloud.com>
+POSTGRES_USER=<postgres_user>
+POSTGRES_PASSWORD=<postgres_pass>
+POSTGRES_DB=<postgres_db>
+POSTGRES_SCHEMA=checker
+
+KAFKA_HOST=<kafka-*****.aivencloud.com>
+KAFKA_PORT=<kafka_port>
+KAFKA_CHECKER_TOPIC=webchecker
+
+KAFKA_SSL_CAFILE="ca.pem"
+KAFKA_SSL_CERTFILE="service.cert"
+KAFKA_SSL_KEYFILE="service.key"
+```
+
 ### Usage 
 
 #### Run the app
@@ -138,3 +167,7 @@ https://webdevblog.ru/realizaciya-shablona-singleton-v-python/
 https://doubles.readthedocs.io/en/latest/usage.html
 https://pypi.org/project/pytest-mock/
 https://github.com/dwyl/learn-postgresql/issues/60
+https://developer.aiven.io/docs/products/kafka/howto/fake-sample-data.html
+https://help.aiven.io/en/collections/341080-postgresql
+https://developer.aiven.io/docs/products/kafka/getting-started.html
+https://help.aiven.io/en/articles/5343895-python-examples-for-testing-aiven-for-apache-kafka

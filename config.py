@@ -27,3 +27,13 @@ POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5432)
 KAFKA_HOST = os.environ.get("KAFKA_HOST")
 KAFKA_PORT = os.environ.get("KAFKA_PORT")
 KAFKA_CHECKER_TOPIC = os.environ.get("KAFKA_CHECKER_TOPIC")
+
+KAFKA_CREDS = {}
+
+if os.environ.get("KAFKA_SSL_CAFILE"):
+    KAFKA_CREDS = {
+        "security_protocol": "SSL",
+        "ssl_cafile": os.environ.get("KAFKA_SSL_CAFILE"),
+        "ssl_certfile": os.environ.get("KAFKA_SSL_CERTFILE"),
+        "ssl_keyfile": os.environ.get("KAFKA_SSL_KEYFILE"),
+    }

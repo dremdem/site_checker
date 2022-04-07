@@ -1,2 +1,5 @@
 *.env
 *.coverage
+*.key
+*.cert
+*.pem
