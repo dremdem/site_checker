@@ -110,6 +110,18 @@ KAFKA_SSL_KEYFILE="service.key"
 python app.py
 ```
 
+#### Run the app with the custom env-file
+
+```shell
+python app.py -e .docker.env
+```
+
+#### Run the app with the pre-initializing the DB schema by the SQL-script 
+
+```shell
+python app.py -s
+```
+
 ## Project structure
 
 ```
@@ -132,7 +144,6 @@ site_checker
 
 ## TBD (To be done)
 
-- Custom env-file by CLI
 - Finalize the tests
 - Operating websites setup, CRUD operations by CLI
 

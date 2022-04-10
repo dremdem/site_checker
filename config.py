@@ -9,14 +9,10 @@ import pathlib
 
 import dotenv
 
-if os.environ.get("CHECKER_TESTING"):
-    dotenv.load_dotenv(
-        os.path.join(pathlib.Path(__file__).parent, ".test.env"))
-else:
-    dotenv.load_dotenv()
-
-
 BASE_DIR = pathlib.Path(__file__).parent
+
+CHECKER_ENV_FILE = os.environ.get("CHECKER_ENV_FILE", '.env')
+dotenv.load_dotenv(os.path.join(BASE_DIR, CHECKER_ENV_FILE))
 
 POSTGRES_HOST = os.environ.get("POSTGRES_HOST")
 POSTGRES_USER = os.environ.get("POSTGRES_USER")

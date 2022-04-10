@@ -1,8 +1,11 @@
 """The main site_checker module"""
 import argparse
+import importlib
 import logging
+import os
 
 import db_service
+import config
 import kafka_service
 import scheduler
 import schemas
@@ -56,10 +59,22 @@ if __name__ == "__main__":
              "Default script located in the db/db_init.sql "
              "The path could be changed in the "
              "POSTGRES_INIT_SQL_SCRIPT env-variable.")
+    parser.add_argument(
+        "-e",
+        "--env_file",
+        required=False,
+        type=str,
+        help="Custom ENV file name. Example: .docker.env")
     args = parser.parse_args()
     logging.basicConfig(level=args.log_level)
     if args.schema_init:
         logger.info("Pre-initialize the DB schema by the SQL-script.")
         db_service.init_schema()
+    if args.env_file:
+        logger.info(f"Get environment from the custom env-file: "
+                    f"{args.env_file}")
+        os.environ.setdefault("CHECKER_ENV_FILE", args.env_file)
+        importlib.reload(config)
+
     schedule_all_websites()
     kafka_service.consume_messages(db_service.write_check_result)
