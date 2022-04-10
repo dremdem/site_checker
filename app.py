@@ -48,7 +48,18 @@ if __name__ == "__main__":
         default=logging.INFO,
         type=lambda x: getattr(logging, x),
         help="Configure the logging level.")
+    parser.add_argument(
+        "-s",
+        "--schema_init",
+        action='store_true',
+        help="Pre-initialize the DB schema by the SQL-script. "
+             "Default script located in the db/db_init.sql "
+             "The path could be changed in the "
+             "POSTGRES_INIT_SQL_SCRIPT env-variable.")
     args = parser.parse_args()
     logging.basicConfig(level=args.log_level)
+    if args.schema_init:
+        logger.info("Pre-initialize the DB schema by the SQL-script.")
+        db_service.init_schema()
     schedule_all_websites()
     kafka_service.consume_messages(db_service.write_check_result)

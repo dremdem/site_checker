@@ -132,7 +132,6 @@ site_checker
 
 ## TBD (To be done)
 
-- DB Schema init by CLI
 - Custom env-file by CLI
 - Finalize the tests
 - Operating websites setup, CRUD operations by CLI

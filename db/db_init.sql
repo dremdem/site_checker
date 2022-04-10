@@ -1,4 +1,4 @@
--- DROP schema IF EXISTS checker cascade;
+DROP schema IF EXISTS checker cascade;
 create schema checker;
 CREATE TABLE checker.website (
 name varchar(50),

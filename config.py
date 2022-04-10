@@ -23,6 +23,8 @@ POSTGRES_USER = os.environ.get("POSTGRES_USER")
 POSTGRES_PASSWORD = os.environ.get("POSTGRES_PASSWORD")
 POSTGRES_DB = os.environ.get("POSTGRES_DB")
 POSTGRES_PORT = os.environ.get("POSTGRES_PORT", 5432)
+POSTGRES_INIT_SQL_SCRIPT = os.environ.get(
+    "POSTGRES_INIT_SQL_SCRIPT", 'db/db_init.sql')
 
 KAFKA_HOST = os.environ.get("KAFKA_HOST")
 KAFKA_PORT = os.environ.get("KAFKA_PORT")

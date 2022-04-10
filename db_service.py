@@ -5,14 +5,19 @@ Import as:
 import db_service
 """
 from typing import List, Union
+import os
+
+import psycopg2.extensions as psql_ext
 
 import db
+import config
 import schemas
 
 
 def write_check_result(
         check_result: Union[schemas.DBCheckResult, dict],
-        connection=db.DBConn.get_conn()) -> bool:
+        connection: psql_ext.connection = db.DBConn.get_conn()
+) -> bool:
     """
     Write check result to the DB.
 
@@ -30,7 +35,9 @@ def write_check_result(
     return True
 
 
-def read_websites(connection=db.DBConn.get_conn()) -> List[schemas.DBWebsite]:
+def read_websites(
+        connection: psql_ext.connection = db.DBConn.get_conn()
+) -> List[schemas.DBWebsite]:
     """
     Read all websites from the DB
 
@@ -50,3 +57,21 @@ def read_websites(connection=db.DBConn.get_conn()) -> List[schemas.DBWebsite]:
                 regexp_pattern=regexp_pattern
             ))
     return website_list
+
+
+def init_schema(
+        connection: psql_ext.connection = db.DBConn.get_conn()
+) -> None:
+    """
+    Initialize the schema by SQL-script
+
+    :param connection: PostgreSQL connection
+    """
+    with connection.cursor() as cursor:
+        cursor.execute(
+            open(
+                os.path.join(
+                    config.BASE_DIR, config.POSTGRES_INIT_SQL_SCRIPT,
+                ), "r"
+            ).read()
+        )
