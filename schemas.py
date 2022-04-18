@@ -84,7 +84,7 @@ class DBWebsite(CheckerBaseModel):
             description="String representing the cron-like schedule definition."
         )
     ]
-    regexp_pattern: Optional[Pattern]
+    regexp_pattern: Optional[str]
 
 
 class DBCheckResult(CheckResult, CheckerBaseModel):

@@ -14,6 +14,28 @@ import config
 import schemas
 
 
+def add_website(
+        website: Union[schemas.DBWebsite, dict],
+        connection: psql_ext.connection = db.DBConn.get_conn()
+) -> bool:
+    """
+    Add website to the DB
+
+    :param website: Schemas model or dict to add.
+    :param connection: PostgreSQL connection.
+    :return: Success result or not.
+    """
+
+    if isinstance(website, dict):
+        website = schemas.DBWebsite(**website)
+
+    with connection.cursor() as cur:
+        cur.execute(website.get_insert_query())
+    connection.commit()
+
+    return True
+
+
 def write_check_result(
         check_result: Union[schemas.DBCheckResult, dict],
         connection: psql_ext.connection = db.DBConn.get_conn()
@@ -23,7 +45,7 @@ def write_check_result(
 
     :param check_result: Schema model with the check result values.
     :param connection: PostgreSQL connection.
-    :return: Success result ot not.
+    :return: Success result or not.
     """
     if isinstance(check_result, dict):
         check_result = schemas.DBCheckResult(**check_result)

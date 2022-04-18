@@ -1,6 +1,7 @@
 """The main site_checker module"""
 import argparse
 import importlib
+import json
 import logging
 import os
 
@@ -65,6 +66,12 @@ if __name__ == "__main__":
         required=False,
         type=str,
         help="Custom ENV file name. Example: .docker.env")
+    parser.add_argument(
+        "-w",
+        "--websites",
+        required=False,
+        type=argparse.FileType('r'),
+        help="Load websites from the JSON-file.")
     args = parser.parse_args()
     logging.basicConfig(level=args.log_level)
     if args.schema_init:
@@ -75,6 +82,10 @@ if __name__ == "__main__":
                     f"{args.env_file}")
         os.environ.setdefault("CHECKER_ENV_FILE", args.env_file)
         importlib.reload(config)
+    if args.websites:
+        websites = json.load(args.websites)
+        for website in websites:
+            db_service.add_website(website=website)
 
     schedule_all_websites()
     kafka_service.consume_messages(db_service.write_check_result)

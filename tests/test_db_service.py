@@ -25,3 +25,13 @@ def test_init_schema(postgresql_my_with_schema):
         cur.execute("select count(*) from checker.website")
         result_count = cur.fetchone()[0]
     assert result_count == 2
+
+
+def test_add_website(postgresql_my_with_schema, website1):
+    """Test to adding the new website to the DB"""
+    db_service.write_check_result(website1, postgresql_my_with_schema)
+    with postgresql_my_with_schema.cursor() as cur:
+        cur.execute(f"select count(*) from checker.website "
+                    f"where name='{website1.name}'")
+        result_count = cur.fetchone()[0]
+    assert result_count == 1
