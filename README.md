@@ -122,6 +122,12 @@ python app.py -e .docker.env
 python app.py -s
 ```
 
+#### Run the app with the pre-initializing the DB schema by the SQL-script and adding some websites from the [JSON-file](websites.json)
+
+```shell
+python app.py -s -w websites.json
+```
+
 ## Project structure
 
 ```
@@ -145,7 +151,6 @@ site_checker
 ## TBD (To be done)
 
 - Finalize the tests
-- Operating websites setup, CRUD operations by CLI
 
 ## Contributing 
 
