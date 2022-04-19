@@ -148,10 +148,6 @@ site_checker
 |   url_checker.py: Site checker itself
 ```
 
-## TBD (To be done)
-
-- Finalize the tests
-
 ## Contributing 
 
 All comments, PR's and issues are welcome!
